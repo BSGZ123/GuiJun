@@ -1,6 +1,6 @@
 {
-  "name": "kejian",
-  "version": "0.1.0",
+  "name": "guijun",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -25,9 +25,10 @@
     "babel-eslint": "^10.0.1",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
-    "node-sass": "^4.12.0",
-    "sass-loader": "^8.0.0",
-    "vue-template-compiler": "^2.6.10"
+    "node-sass": "^6.0.1",
+    "sass-loader": "^10.2.0",
+    "vue-template-compiler": "^2.6.10",
+    "webpack": "^4.46.0"
   },
   "eslintConfig": {
     "root": true,

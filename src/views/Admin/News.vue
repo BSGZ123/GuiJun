@@ -6,21 +6,21 @@
       <el-table-column prop="Id" label="序号" width="180"></el-table-column>
       <el-table-column prop="Title" label="新闻标题" width="180"></el-table-column>
       <el-table-column prop="Img" label="图片">
-        <template slot-scope="scope">
+        <template v-slot="scope">
           <img style="width:100%" :src="imgserver + scope.row.Img" alt />
         </template>
       </el-table-column>
       <el-table-column prop="Content" label="新闻内容">
-        <template slot-scope="scope">
+        <template v-slot="scope">
           <p v-if="scope.row.Content.length > 100">{{scope.row.Content.substring(0,100)}} ...</p>
           <p v-else>{{scope.row.Content}}</p>
         </template>
       </el-table-column>
       <el-table-column prop="Type" label="新闻类别">
-        <template slot-scope="scope">{{scope.row.Type == 1 ? '公司新闻':'行业动态'}}</template>
+        <template v-slot="scope">{{scope.row.Type == 1 ? '公司新闻':'行业动态'}}</template>
       </el-table-column>
       <el-table-column label="操作">
-        <template slot-scope="scope">
+        <template v-slot="scope">
           <el-button
             type="primary"
             icon="el-icon-edit"

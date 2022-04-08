@@ -47,7 +47,7 @@
             <router-view />
           </div>
         </el-main>
-        <el-footer>2019@科建版权所有</el-footer>
+        <el-footer>2022@桂君版权所有</el-footer>
       </el-container>
     </el-container>
   </div>

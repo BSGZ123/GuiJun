@@ -7,11 +7,11 @@
       <el-table-column prop="LoginName" label="用户名"></el-table-column>
       <el-table-column prop="Password" label="密码"></el-table-column>
       <el-table-column prop="IsAction" label="是否启用">
-        <template slot-scope="scope">{{ scope.row.IsAction ? '是':'否' }}</template>
+        <template v-slot="scope">{{ scope.row.IsAction ? '是':'否' }}</template>
       </el-table-column>
       <el-table-column prop="CreateTime" label="创建时间" :formatter="dateFormat"></el-table-column>
       <el-table-column label="操作">
-        <template slot-scope="scope">
+        <template v-slot="scope">
           <el-button
             type="primary"
             icon="el-icon-edit"

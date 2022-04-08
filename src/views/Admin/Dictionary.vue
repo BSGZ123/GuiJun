@@ -7,7 +7,7 @@
       <el-table-column prop="Key" label="键" width="180"></el-table-column>
       <el-table-column prop="Content" label="值"></el-table-column>
       <el-table-column label="操作">
-        <template slot-scope="scope">
+        <template v-slot="scope">
           <el-button
             type="primary"
             icon="el-icon-edit"
