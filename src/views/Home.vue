@@ -3,8 +3,8 @@
     <swiper id="swiperBox" v-bind:options="swiperOption" ref="mySwiper">
       <swiper-slide class="swiper-slide slide-one">
         <div class="page">
-          <h3>科建股份</h3>
-          <p>KeJian Stock</p>
+          <h3>桂君智能化</h3>
+          <p>GuiJun Intelligent</p>
         </div>
         <p class="slogan">立人立己 达人达己</p>
       </swiper-slide>
@@ -65,14 +65,18 @@
     </swiper>
   </div>
 </template>
- 
+
 <script>
-import { swiper, swiperSlide } from "vue-awesome-swiper";
+import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
+import 'swiper/css/swiper.css'
+
 export default {
-  name: "HelloWorld",
   components: {
-    swiper,
-    swiperSlide
+    Swiper,
+    SwiperSlide
+  },
+  directives: {
+    swiper: directive
   },
   data() {
     return {
@@ -138,7 +142,7 @@ export default {
   }
 };
 </script>
- 
+
 <style lang="scss" scoped>
 /* .el-header {
   position: absolute;

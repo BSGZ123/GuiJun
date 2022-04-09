@@ -8,7 +8,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
 
 import VueAwesomeSwiper from 'vue-awesome-swiper'
-import 'swiper/dist/css/swiper.css'
+import 'swiper/css/swiper.css'
 Vue.use(VueAwesomeSwiper);
 
 import VideoPlayer from 'vue-video-player'

@@ -120,13 +120,18 @@
 
 <script>
 import Banner from "../components/Banner";
-import { swiper, swiperSlide } from "vue-awesome-swiper";
+import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
+import 'swiper/css/swiper.css'
 export default {
   components: {
     Banner,
-    swiper,
-    swiperSlide
+    Swiper,
+    SwiperSlide
   },
+  directives: {
+    swiper: directive
+  }
+,
   data() {
     return {
       loading: true,
