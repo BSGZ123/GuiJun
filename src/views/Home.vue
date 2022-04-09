@@ -10,7 +10,7 @@
       </swiper-slide>
       <swiper-slide class="swiper-slide slide-two">
         <div class="page">
-          <h3>经典案例</h3>
+          <h3>成功案例</h3>
           <p>Suecessful Cass</p>
         </div>
         <ul class="case-item">
