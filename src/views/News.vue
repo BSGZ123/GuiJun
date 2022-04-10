@@ -6,30 +6,33 @@
         <div class="content-nav">
           <div
             class="content-nav-btn"
-            :class="{'content-nav-active':newstype == 1}"
+            :class="{ 'content-nav-active': newstype == 1 }"
             @click="newstype = 1"
           >
             <span>公司新闻</span>
           </div>
           <div
             class="content-nav-btn"
-            :class="{'content-nav-active':newstype == 2}"
-            @click="newstype = 2 "
+            :class="{ 'content-nav-active': newstype == 2 }"
+            @click="newstype = 2"
           >
             <span>行业动态</span>
           </div>
         </div>
 
         <div class="content-nav-item">
-          <div class="item-list" v-for="(item,index) in newsList" :key="index">
-            <div class="item-img" v-lazy:background-image="imgserver + item.Img"></div>
+          <div class="item-list" v-for="(item, index) in newsList" :key="index">
+            <div
+              class="item-img"
+              v-lazy:background-image="imgserver + item.Img"
+            ></div>
 
-            <p class="item-list-title">{{item.Title}}</p>
-            <p class="item-list-content">{{item.Content}}</p>
+            <p class="item-list-title">{{ item.Title }}</p>
+            <p class="item-list-content">{{ item.Content }}</p>
             <div class="item-list-more">
               <router-link
                 class="text-decoration"
-                :to="{ name: 'newsdetails', params: { id: item.Id }}"
+                :to="{ name: 'newsdetails', params: { id: item.Id } }"
               >
                 <img src="../assets/img/sanjiao.png" />
                 <span>more</span>
@@ -43,45 +46,46 @@
 </template>
 
 <script>
-import Banner from "../components/Banner";
+import * as Vue from 'vue'
+import Banner from '../components/Banner'
 export default {
-  name: "news",
+  name: 'news',
   components: {
-    Banner
+    Banner,
   },
   data() {
     return {
       loading: true,
       newsList: [],
-      newstype: 1
-    };
+      newstype: 1,
+    }
   },
   methods: {
     loadData() {
-      this.loading = true;
+      this.loading = true
       this.$http
         .get(`News?type=${this.newstype}&num=6`)
-        .then(response => {
+        .then((response) => {
           //console.log(response);
-          this.newsList = response.data;
-          this.loading = false;
+          this.newsList = response.data
+          this.loading = false
           //window.console.log(this.newsList);
         })
-        .catch(function(error) {
-          window.console.log(error);
-        });
-    }
+        .catch(function (error) {
+          window.console.log(error)
+        })
+    },
   },
   mounted() {
-    this.loadData();
+    this.loadData()
   },
   watch: {
     newstype(type) {
-      window.console.log(type);
-      this.loadData();
-    }
-  }
-};
+      window.console.log(type)
+      this.loadData()
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped>
@@ -95,7 +99,6 @@ export default {
   background-color: #14679f;
   position: relative;
   overflow: hidden;
-
   &-section {
     width: 100%;
     //height: 1600px;

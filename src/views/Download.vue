@@ -5,13 +5,13 @@
 </template>
 
 <script>
-import Banner from "../components/Banner";
+import * as Vue from 'vue'
+import Banner from '../components/Banner'
 export default {
   components: {
-    Banner
-  }
-};
+    Banner,
+  },
+}
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

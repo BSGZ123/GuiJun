@@ -3,59 +3,55 @@
     <banner img="../assets/img/bgtop.jpg" />
     <div class="NewsDetails-product">
       <div class="NewsDetails-product-content">
-        <img v-lazy="imgserver+newsIdList.Img" alt />
-        <p class="product-title">{{newsIdList.Title}}</p>
-        <p class="product-time">{{newsIdList.CreateTime}}</p>
-        <p class="product-content">{{newsIdList.Content}}</p>
+        <img v-lazy="imgserver + newsIdList.Img" alt />
+        <p class="product-title">{{ newsIdList.Title }}</p>
+        <p class="product-time">{{ newsIdList.CreateTime }}</p>
+        <p class="product-content">{{ newsIdList.Content }}</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Banner from "../components/Banner";
+import * as Vue from 'vue'
+import Banner from '../components/Banner'
 export default {
-  name: "NewsDetails",
+  name: 'NewsDetails',
   components: {
-    Banner
+    Banner,
   },
   data() {
     return {
       pid: 0,
-      newsIdList: {}
-    };
+      newsIdList: {},
+    }
   },
   created() {
-    this.pid = this.$route.params.id;
-    window.console.log(this.pid);
+    this.pid = this.$route.params.id
+    window.console.log(this.pid)
   },
   mounted() {
-    this.loadData();
+    this.loadData()
   },
   methods: {
     loadData() {
       this.$http
         .get(`News/GetNewsById/${this.pid}`)
-        .then(response => {
+        .then((response) => {
           //console.log(response);
-          this.newsIdList = response.data;
-          window.console.log(this.newsIdList);
+          this.newsIdList = response.data
+          window.console.log(this.newsIdList)
         })
-        .catch(function(error) {
-          window.console.log(error);
-        });
-    }
-  }
-};
+        .catch(function (error) {
+          window.console.log(error)
+        })
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped>
-.NewsDetails {
-  width: 100%;
-  height: 100%;
-  //overflow: hidden;
-  background-color: #14679f;
-  &-product {
+.NewsDetails{width:100%;height:100%;//overflow:hidden;background-color:#14679f;&-product {
     width: 1240px;
     margin: 0 auto;
     background-color: #fff;
@@ -83,5 +79,4 @@ export default {
       }
     }
   }
-}
 </style>

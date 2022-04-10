@@ -63,67 +63,33 @@
 </template>
 
 <script>
+import * as Vue from 'vue'
 export default {
   data() {
     return {
       router: true,
-      defaultActive: "/",
-      isShow: false
-    };
+      defaultActive: '/',
+      isShow: false,
+    }
   },
   methods: {
     handleSelect(key) {
-      this.isShow = this.defaultActive != key;
-      window.console.log(this.isShow);
-    }
-  }
-};
+      this.isShow = this.defaultActive != key
+      window.console.log(this.isShow)
+    },
+  },
+}
 </script>
 
 <style lang="scss">
-* {
-  padding: 0;
-  margin: 0;
-}
-html,
-body {
-  height: 100%;
-}
-
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-}
-
-.el-header {
-  display: flex;
-  justify-content: space-between;
-  align-content: center;
-  width: 1240px;
-  margin: 0 auto;
-  //background-color: #fff;
-
-  .logo {
+*{padding:0;margin:0}html,body{height:100%}#app{font-family:"Avenir",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;color:#2c3e50}.el-header{display:flex;justify-content:space-between;align-content:center;width:1240px;margin:0 auto;//background-color:#fff;.logo {
     width: 280px;
     padding: 10px;
     img {
       width: 100%;
       line-height: 60px;
     }
-  }
-}
-.el-main {
-  padding: 0 !important;
-}
-
-.footer {
-  width: 100%;
-  height: 216px;
-  overflow: hidden;
-  background-color: #14679f;
-  &-content {
+  }.el-main{padding:0!important}.footer{width:100%;height:216px;overflow:hidden;background-color:#14679f;&-content {
     width: 1240px;
     margin: 0 auto;
     padding-top: 20px;
@@ -163,6 +129,5 @@ body {
       color: #fff;
       line-height: 30px;
     }
-  }
-}
+  }}
 </style>

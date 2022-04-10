@@ -13,8 +13,10 @@
               目前工程管理软件研发团队10人，包括硕士和研究生在内，平均年龄在35岁。公司自主研发工程项目管理
               标准化+互联网协同工作系统平台，此软件广泛应用于工程项目管理过程，实现全覆盖检查、全过程控制、全方位协调的目标。
               目前公司业务范围涉及上海、广东等多地，合作的单位有上海同济工程项目管理咨询有限公司、
-              上海华银日用品有限公司、中科建设开发总公司、广东怡轩房地产开发有限公司等多家知名企业。 立人立己、达人达己！公司一直秉承“
-              帮助施工单位解决技术问题、帮助业主解决协调问题 ”的管理理念，上海科建工程管理股份有限公司不断在工程项目管理领域开拓创新，
+              上海华银日用品有限公司、中科建设开发总公司、广东怡轩房地产开发有限公司等多家知名企业。
+              立人立己、达人达己！公司一直秉承“
+              帮助施工单位解决技术问题、帮助业主解决协调问题
+              ”的管理理念，上海科建工程管理股份有限公司不断在工程项目管理领域开拓创新，
               通过不断完善工程项目管理标准化+互联网协同工作系统平台，实现每项工程“无重大安全事故、无重大返工、工程施工材料无伪劣产品、
               工程管理留下痕迹、施工过程可追溯”五大管理目标。
             </p>
@@ -36,24 +38,35 @@
           </div>
           <div class="course-time">
             <swiper :options="swiperOption" ref="mySwiper">
-              <swiper-slide v-for="(item,index) in courseList" :key="index">
+              <swiper-slide v-for="(item, index) in courseList" :key="index">
                 <div class="time-show">
-                  <div class="time-show-item" v-for="(courseOne,one) in item" :key="one">
-                    <div class="item-top" :class="{'order-top' : one%2===1}"></div>
+                  <div
+                    class="time-show-item"
+                    v-for="(courseOne, one) in item"
+                    :key="one"
+                  >
+                    <div
+                      class="item-top"
+                      :class="{ 'order-top': one % 2 === 1 }"
+                    ></div>
                     <el-divider>
                       <i class="el-icon-mobile-phone"></i>
                     </el-divider>
-                    <div class="item-bottom" :class="{'order' : one%2===1}">
+                    <div class="item-bottom" :class="{ order: one % 2 === 1 }">
                       <div class="item-bottom-content">
-                        <p>{{courseOne.Content}}</p>
-                        <p>{{courseOne.Year}}</p>
+                        <p>{{ courseOne.Content }}</p>
+                        <p>{{ courseOne.Year }}</p>
                       </div>
                     </div>
                   </div>
                 </div>
               </swiper-slide>
-              <div class="swiper-button-prev" slot="button-prev"></div>
-              <div class="swiper-button-next" slot="button-next"></div>
+              <template v-slot:button-prev>
+                <div class="swiper-button-prev"></div>
+              </template>
+              <template v-slot:button-next>
+                <div class="swiper-button-next"></div>
+              </template>
             </swiper>
           </div>
         </div>
@@ -70,7 +83,10 @@
         <!-- 公司荣誉 -->
         <div class="content-honor">
           <div class="honor-big-img">
-            <el-dialog :title="dialogTitle" :visible.sync="dialogTableVisible">
+            <el-dialog
+              :title="dialogTitle"
+              v-model:visible="dialogTableVisible"
+            >
               <img v-lazy="dialogUrl" alt />
             </el-dialog>
           </div>
@@ -80,10 +96,14 @@
             <div class="border"></div>
           </div>
           <ul class="honor-show">
-            <li v-for="(honor,index) in honorList" :key="index">
+            <li v-for="(honor, index) in honorList" :key="index">
               <img
-                v-lazy="imgserver+honor.Img"
-                @click="dialogTableVisible = true ;dialogUrl = imgserver + honor.Img;dialogTitle= honor.Remark"
+                v-lazy="imgserver + honor.Img"
+                @click="
+                  dialogTableVisible = true,
+                  dialogUrl = imgserver + honor.Img,
+                  dialogTitle = honor.Remark
+                "
               />
             </li>
           </ul>
@@ -96,8 +116,11 @@
             <p>TEAM</p>
           </div>
           <el-carousel :interval="4000" type="card">
-            <el-carousel-item v-for="(team,index) in teamItem" :key="index">
-              <div class="swiper-img" v-lazy:background-image="imgserver + team.Img"></div>
+            <el-carousel-item v-for="(team, index) in teamItem" :key="index">
+              <div
+                class="swiper-img"
+                v-lazy:background-image="imgserver + team.Img"
+              ></div>
             </el-carousel-item>
           </el-carousel>
         </div>
@@ -107,8 +130,8 @@
             <h3>合作伙伴</h3>
             <p>RARTNERS</p>
             <ul class="partner-img">
-              <li v-for="(partner,i) in partnerImg" :key="i">
-                <img v-lazy="imgserver+partner.Img" alt />
+              <li v-for="(partner, i) in partnerImg" :key="i">
+                <img v-lazy="imgserver + partner.Img" alt />
               </li>
             </ul>
           </div>
@@ -119,19 +142,19 @@
 </template>
 
 <script>
-import Banner from "../components/Banner";
+import * as Vue from 'vue'
+import Banner from '../components/Banner'
 import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
 export default {
   components: {
     Banner,
     Swiper,
-    SwiperSlide
+    SwiperSlide,
   },
   directives: {
-    swiper: directive
-  }
-,
+    swiper: directive,
+  },
   data() {
     return {
       loading: true,
@@ -141,63 +164,52 @@ export default {
       teamItem: [],
       swiperOption: {
         navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev"
-        }
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
       },
       dialogTableVisible: false,
-      dialogUrl: "",
-      dialogTitle: ""
-    };
+      dialogUrl: '',
+      dialogTitle: '',
+    }
   },
   mounted() {
     this.$http
       .all([
-        this.$http.get("Honor/GetHonorAll"),
-        this.$http.get("Enterprise/GetEnterpriseAll"),
+        this.$http.get('Honor/GetHonorAll'),
+        this.$http.get('Enterprise/GetEnterpriseAll'),
         this.$http.get(`Team/GetTeamAll`),
-        this.$http.get(`Course/GetCourseAll`)
+        this.$http.get(`Course/GetCourseAll`),
       ])
       .then(
         this.$http.spread(
           (responseHonor, responseEnterprise, responseTeam, responseCourse) => {
-            this.honorList = responseHonor.data;
-            this.partnerImg = responseEnterprise.data;
-            this.teamItem = responseTeam.data;
+            this.honorList = responseHonor.data
+            this.partnerImg = responseEnterprise.data
+            this.teamItem = responseTeam.data
 
-            var groupCount = Math.ceil(responseCourse.data.length / 2);
-            window.console.log(groupCount);
+            var groupCount = Math.ceil(responseCourse.data.length / 2)
+            window.console.log(groupCount)
             for (let i = 0; i < groupCount; i++) {
-              let img2 = [];
+              let img2 = []
               for (let j = 0; j < 2; j++) {
                 if (responseCourse.data.length - 1 >= i * 2 + j) {
-                  img2.push(responseCourse.data[i * 2 + j]);
+                  img2.push(responseCourse.data[i * 2 + j])
                 }
               }
-              this.courseList.push(img2);
+              this.courseList.push(img2)
             }
-            window.console.log(this.courseList);
-            this.loading = false;
+            window.console.log(this.courseList)
+            this.loading = false
           }
         )
-      );
-  }
-};
+      )
+  },
+}
 </script>
 
 <style lang="scss" scoped>
-* {
-  margin: 0;
-  padding: 0;
-}
-
-.go-in {
-  width: 100%;
-  height: 100%;
-  background-color: #14679f;
-  position: relative;
-  overflow: hidden;
-  .section {
+*{margin:0;padding:0}.go-in{width:100%;height:100%;background-color:#14679f;position:relative;overflow:hidden;.section {
     width: 100%;
     &-content {
       width: 1240px;
@@ -380,44 +392,7 @@ export default {
         }
       }
     }
-  }
-}
-
-@keyframes imgboxkey {
-  0% {
-    border: solid rgb(29, 66, 185) 2px;
-  }
-  40% {
-    border: solid rgb(255, 255, 255) 2px;
-  }
-  60% {
-    border: solid rgb(255, 255, 255) 2px;
-  }
-  100% {
-    border: solid rgb(29, 66, 185) 2px;
-  }
-}
-
-@keyframes imgbo {
-  0% {
-    transform: scale(1);
-    box-shadow: 0px 0px 0px 0px #ababab;
-  }
-  50% {
-    transform: scale(1.1);
-    box-shadow: 0px 0px 10px 5px #ababab;
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0px 0px 0px 0px #ababab;
-  }
-}
-.el-divider--horizontal {
-  margin: 1px 0;
-}
-
-.top {
-  h3,
+  }}@keyframes imgboxkey{0%{border:solid rgb(29,66,185) 2px}40%{border:solid rgb(255,255,255) 2px}60%{border:solid rgb(255,255,255) 2px}100%{border:solid rgb(29,66,185) 2px}}@keyframes imgbo{0%{transform:scale(1);box-shadow:0px 0px 0px 0px #ababab}50%{transform:scale(1.1);box-shadow:0px 0px 10px 5px #ababab}100%{transform:scale(1);box-shadow:0px 0px 0px 0px #ababab}}.el-divider--horizontal{margin:1px 0}.top{h3,
   p {
     text-align: center;
     color: #3c6088;
@@ -434,41 +409,14 @@ export default {
     border-bottom: 1px solid #3c6088;
     width: 15%;
     margin: 0 auto;
-  }
-}
-// .swiper-button-disabled {
-//   display: none;
-// }
-.order {
-  order: -1;
-}
-.order-top {
-  order: 1;
-}
-.el-divider {
-  background-color: red;
-  height: 3px;
-  .el-divider__text {
+  //}/*// .swiper-button-disabled*/{/*//   display: none;*//*//*/}.order{order:-1}.order-top{order:1}.el-divider{background-color:red;height:3px;.el-divider__text {
     width: 20px;
     height: 20px;
     border-radius: 50%;
     padding: 0px;
     color: #fff;
     border: 3px solid red;
-  }
-}
-.el-divider-active {
-  background-color: #3c6088;
-}
-.honor-big-img {
-  width: 100%;
-  height: 100%;
-  z-index: 10;
-  text-align: center;
-  padding-bottom: 20px;
-  padding: 5%;
-  //background-color: #14679f;
-  .el-dialog__wrapper {
+  }}.el-divider-active{background-color:#3c6088}.honor-big-img{width:100%;height:100%;z-index:10;text-align:center;padding-bottom:20px;padding:5%;//background-color:#14679f;.el-dialog__wrapper {
     position: fixed;
     top: 0;
     right: 0;
@@ -484,5 +432,4 @@ export default {
       }
     }
   }
-}
 </style>

@@ -21,185 +21,193 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-dialog title="案例编辑" :visible.sync="dialogFormVisible">
+    <el-dialog title="案例编辑" v-model:visible="dialogFormVisible">
       <el-form :model="formData">
         <el-form-item label="数据键" :label-width="formLabelWidth">
-          <el-input v-model="formData.Key" autocomplete="off"></el-input>
+          <el-input v-model:value="formData.Key" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="数据键" :label-width="formLabelWidth">
-          <el-input v-model="formData.Content" autocomplete="off"></el-input>
+          <el-input
+            v-model:value="formData.Content"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
       </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="handleCreateOrModify()">确 定</el-button>
-      </div>
+      <template v-slot:footer>
+        <div class="dialog-footer">
+          <el-button @click="dialogFormVisible = false">取 消</el-button>
+          <el-button type="primary" @click="handleCreateOrModify()"
+            >确 定</el-button
+          >
+        </div>
+      </template>
     </el-dialog>
   </div>
 </template>
 
 <script>
+import * as Vue from 'vue'
 export default {
   data() {
     return {
       loading: true,
       dialogFormVisible: false,
-      formLabelWidth: "120px",
+      formLabelWidth: '120px',
       tableData: [],
       formData: {
         Id: 0,
-        Key: "",
-        Content: "",
-        CreateTime: new Date()
+        Key: '',
+        Content: '',
+        CreateTime: new Date(),
       },
-      options: {}
-    };
+      options: {},
+    }
   },
   mounted() {
-    let token = "Browser " + sessionStorage.getItem("token");
+    let token = 'Browser ' + sessionStorage.getItem('token')
     //window.console.log(token);
     this.options = {
       headers: {
-        Authorization: token
-      }
-    };
+        Authorization: token,
+      },
+    }
 
-    this.loadData();
+    this.loadData()
   },
   methods: {
     loadData() {
-      this.loading = true;
+      this.loading = true
       this.$http
         .get(`DataDictionary/GetDataDictionaryAll?key=`)
-        .then(response => {
-          window.console.log(response);
-          this.tableData = response.data;
-          this.loading = false;
+        .then((response) => {
+          window.console.log(response)
+          this.tableData = response.data
+          this.loading = false
         })
-        .catch(e => {
+        .catch((e) => {
           this.$message({
-            message: "网络或程序异常！" + e,
-            type: "error"
-          });
-        });
+            message: '网络或程序异常！' + e,
+            type: 'error',
+          })
+        })
     },
     openDialog() {
       // 清除数据
-      this.formData.Id = 0;
-      this.formData.Key = "";
-      this.formData.Content = "";
-      this.formData.CreateTime = new Date();
+      this.formData.Id = 0
+      this.formData.Key = ''
+      this.formData.Content = ''
+      this.formData.CreateTime = new Date()
 
-      this.dialogFormVisible = true;
+      this.dialogFormVisible = true
     },
     // 新增
     handleCreateOrModify() {
-      window.console.log(this.formData);
+      window.console.log(this.formData)
       //window.console.log(JSON.stringify(this.formData));
       if (!this.formData.Id) {
         // ID 无效时 视为新增
-        this.loading = true;
+        this.loading = true
         this.$http
           .post(
-            "DataDictionary/CreateDataDictionary",
+            'DataDictionary/CreateDataDictionary',
             this.formData,
             this.options
           )
-          .then(response => {
-            this.loading = false;
-            window.console.log(response);
+          .then((response) => {
+            this.loading = false
+            window.console.log(response)
             this.$message({
-              message: "创建成功！",
-              type: "success"
-            });
-            this.dialogFormVisible = false;
-            this.loadData();
+              message: '创建成功！',
+              type: 'success',
+            })
+            this.dialogFormVisible = false
+            this.loadData()
           })
-          .catch(e => {
+          .catch((e) => {
             this.$message({
-              message: "网络或程序异常！" + e,
-              type: "error"
-            });
-          });
+              message: '网络或程序异常！' + e,
+              type: 'error',
+            })
+          })
       } else {
-        this.loading = true;
+        this.loading = true
         this.$http
           .post(
-            "DataDictionary/ModifiedDataDictionary",
+            'DataDictionary/ModifiedDataDictionary',
             this.formData,
             this.options
           )
-          .then(response => {
-            this.loading = false;
-            window.console.log(response);
+          .then((response) => {
+            this.loading = false
+            window.console.log(response)
             this.$message({
-              message: "修改成功！",
-              type: "success"
-            });
-            this.dialogFormVisible = false;
-            this.loadData();
+              message: '修改成功！',
+              type: 'success',
+            })
+            this.dialogFormVisible = false
+            this.loadData()
           })
-          .catch(e => {
+          .catch((e) => {
             this.$message({
-              message: "网络或程序异常！" + e,
-              type: "error"
-            });
-          });
+              message: '网络或程序异常！' + e,
+              type: 'error',
+            })
+          })
       }
     },
     handleEdit(index, row) {
-      window.console.log(index, row);
-      this.formData = row;
-      this.dialogFormVisible = true;
+      window.console.log(index, row)
+      this.formData = row
+      this.dialogFormVisible = true
     },
     handleDelete(index, row) {
-      window.console.log(index, row);
-      this.$confirm("此操作将永久此条数据, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
+      window.console.log(index, row)
+      this.$confirm('此操作将永久此条数据, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
       })
         .then(() => {
           // 已确认删除
           // 调接口删除
-          this.loading = true;
+          this.loading = true
           this.$http
             .post(
               `DataDictionary/DeleteDataDictionary?id=${row.Id}`,
               null,
               this.options
             )
-            .then(response => {
-              this.loading = false;
-              window.console.log(response);
+            .then((response) => {
+              this.loading = false
+              window.console.log(response)
               this.$message({
-                message: "删除成功！",
-                type: "success"
-              });
-              this.loadData();
+                message: '删除成功！',
+                type: 'success',
+              })
+              this.loadData()
             })
-            .catch(e => {
+            .catch((e) => {
               this.$message({
-                message: "网络或程序异常！" + e,
-                type: "error"
-              });
-            });
+                message: '网络或程序异常！' + e,
+                type: 'error',
+              })
+            })
         })
         .catch(() => {
           this.$message({
-            type: "info",
-            message: "已取消删除"
-          });
-        });
+            type: 'info',
+            message: '已取消删除',
+          })
+        })
     },
     //时间格式化
-    dateFormat: function(row) {
+    dateFormat: function (row) {
       //row 表示一行数据, CreateTime 表示要格式化的字段名称
-      let t = new Date(row.CreateTime);
-      return t.getFullYear() + "-" + (t.getMonth() + 1) + "-" + t.getDate();
-    }
-  }
-};
+      let t = new Date(row.CreateTime)
+      return t.getFullYear() + '-' + (t.getMonth() + 1) + '-' + t.getDate()
+    },
+  },
+}
 </script>
 
 <style scoped>

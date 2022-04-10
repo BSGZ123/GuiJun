@@ -5,25 +5,26 @@
       <img src="../assets/img/bgtop.jpg" />
     </div>
     <div class="banner-title">
-      <p>{{title}}</p>
+      <p>{{ title }}</p>
     </div>
   </div>
 </template>
 
 <script>
+import * as Vue from 'vue'
 export default {
-  name: "Banner",
+  name: 'Banner',
   props: {
     title: {
       type: String,
-      default: ""
+      default: '',
     },
     img: {
       type: String,
-      default: "../assets/img/bgtop.jpg"
-    }
-  }
-};
+      default: '../assets/img/bgtop.jpg',
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped>
@@ -34,7 +35,6 @@ export default {
   position: relative;
   overflow: hidden;
   background-color: #fff;
-
   .mm {
     position: absolute;
     width: 100%;

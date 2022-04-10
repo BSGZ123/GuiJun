@@ -5,39 +5,57 @@
         <el-menu default-active="2" class="el-menu-vertical-demo" router>
           <el-menu-item index="/admin/user">
             <i class="el-icon-star-off"></i>
-            <span slot="title">后台用户管理</span>
+            <template v-slot:title>
+              <span>后台用户管理</span>
+            </template>
           </el-menu-item>
           <el-menu-item index="/admin/news">
             <i class="el-icon-news"></i>
-            <span slot="title">新闻咨询管理</span>
+            <template v-slot:title>
+              <span>新闻咨询管理</span>
+            </template>
           </el-menu-item>
           <el-menu-item index="/admin/cases">
             <i class="el-icon-location-outline"></i>
-            <span slot="title">案例信息管理</span>
+            <template v-slot:title>
+              <span>案例信息管理</span>
+            </template>
           </el-menu-item>
           <el-menu-item index="/admin/team">
             <i class="el-icon-picture-outline"></i>
-            <span slot="title">团队风采管理</span>
+            <template v-slot:title>
+              <span>团队风采管理</span>
+            </template>
           </el-menu-item>
           <el-menu-item index="/admin/course">
             <i class="el-icon-time"></i>
-            <span slot="title">发展历程管理</span>
+            <template v-slot:title>
+              <span>发展历程管理</span>
+            </template>
           </el-menu-item>
           <el-menu-item index="/admin/enterprise">
             <i class="el-icon-edit-outline"></i>
-            <span slot="title">合作企业管理</span>
+            <template v-slot:title>
+              <span>合作企业管理</span>
+            </template>
           </el-menu-item>
           <el-menu-item index="/admin/honor">
             <i class="el-icon-edit-outline"></i>
-            <span slot="title">荣誉墙管理</span>
+            <template v-slot:title>
+              <span>荣誉墙管理</span>
+            </template>
           </el-menu-item>
           <el-menu-item index="/admin/dictionary">
             <i class="el-icon-setting"></i>
-            <span slot="title">数据字典管理</span>
+            <template v-slot:title>
+              <span>数据字典管理</span>
+            </template>
           </el-menu-item>
           <el-menu-item index="/admin/page">
             <i class="el-icon-setting"></i>
-            <span slot="title">测试分页</span>
+            <template v-slot:title>
+              <span>测试分页</span>
+            </template>
           </el-menu-item>
         </el-menu>
       </el-aside>
@@ -54,20 +72,19 @@
 </template>
 
 <script>
+import * as Vue from 'vue'
 export default {
-  name: "admin"
-};
+  name: 'admin',
+}
 </script>
 
 <style lang="scss" soped>
 .admin {
   border-top: 1px solid rgb(238, 238, 238);
 }
-
 .base-padding {
   padding: 20px;
 }
-
 .el-footer {
   line-height: 60px;
 }

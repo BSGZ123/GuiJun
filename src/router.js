@@ -1,115 +1,138 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import * as Vue from 'vue'
+import * as VueRouter from 'vue-router'
 
-Vue.use(Router)
-
-let kejianrouter = new Router({
-  routes: [{
+let kejianrouter = VueRouter.createRouter({
+  history: VueRouter.createWebHashHistory(),
+  routes: [
+    {
       path: '/',
       name: 'home',
-      component: () => import('./views/Home.vue')
+      component: Vue.defineAsyncComponent(() => import('./views/Home.vue')),
     },
     {
       path: '/news',
       name: 'news',
-      component: () => import('./views/News.vue'),
+      component: Vue.defineAsyncComponent(() => import('./views/News.vue')),
     },
     {
       path: '/newsdetails/:id',
       name: 'newsdetails',
-      component: () => import('./views/NewsDetails.vue'),
+      component: Vue.defineAsyncComponent(
+        () => import('./views/NewsDetails.vue')
+      ),
     },
     {
       path: '/product',
       name: 'product',
-      component: () => import('./views/Product.vue'),
+      component: Vue.defineAsyncComponent(() => import('./views/Product.vue')),
     },
     {
       path: '/case',
       name: 'case',
-      component: () => import('./views/Case.vue')
+      component: Vue.defineAsyncComponent(() => import('./views/Case.vue')),
     },
     {
       path: '/casedetails/:id',
       name: 'casedetails',
-      component: () => import('./views/CaseDetails.vue')
+      component: Vue.defineAsyncComponent(
+        () => import('./views/CaseDetails.vue')
+      ),
     },
     {
       path: '/goin',
       name: 'goin',
-      component: () => import('./views/GoIn.vue')
+      component: Vue.defineAsyncComponent(() => import('./views/GoIn.vue')),
     },
     {
       path: '/download',
       name: 'download',
-      component: () => import('./views/Download.vue')
+      component: Vue.defineAsyncComponent(() => import('./views/Download.vue')),
     },
     {
       path: '/login',
       name: 'login',
-      component: () => import('./views/Login.vue')
+      component: Vue.defineAsyncComponent(() => import('./views/Login.vue')),
     },
     {
       path: '/admin',
       name: 'admin',
       meta: {
-        requireAuth: true
+        requireAuth: true,
       },
-      component: () => import('./views/Admin.vue'),
-      children: [{
+      component: Vue.defineAsyncComponent(() => import('./views/Admin.vue')),
+      children: [
+        {
           path: '/admin/user',
           name: 'user',
-          component: () => import('./views/Admin/User.vue')
+          component: Vue.defineAsyncComponent(
+            () => import('./views/Admin/User.vue')
+          ),
         },
         {
           path: '/admin/news',
           name: 'new',
-          component: () => import('./views/Admin/News.vue')
+          component: Vue.defineAsyncComponent(
+            () => import('./views/Admin/News.vue')
+          ),
         },
         {
           path: '/admin/cases',
           name: 'cases',
-          component: () => import('./views/Admin/Cases.vue')
+          component: Vue.defineAsyncComponent(
+            () => import('./views/Admin/Cases.vue')
+          ),
         },
         {
           path: '/admin/team',
           name: 'team',
-          component: () => import('./views/Admin/Team.vue')
+          component: Vue.defineAsyncComponent(
+            () => import('./views/Admin/Team.vue')
+          ),
         },
         {
           path: '/admin/course',
           name: 'course',
-          component: () => import('./views/Admin/Course.vue')
+          component: Vue.defineAsyncComponent(
+            () => import('./views/Admin/Course.vue')
+          ),
         },
         {
           path: '/admin/enterprise',
           name: 'enterprise',
-          component: () => import('./views/Admin/Enterprise.vue')
+          component: Vue.defineAsyncComponent(
+            () => import('./views/Admin/Enterprise.vue')
+          ),
         },
         {
           path: '/admin/honor',
           name: 'honor',
-          component: () => import('./views/Admin/Honor.vue')
+          component: Vue.defineAsyncComponent(
+            () => import('./views/Admin/Honor.vue')
+          ),
         },
         {
           path: '/admin/dictionary',
           name: 'dictionary',
-          component: () => import('./views/Admin/Dictionary.vue')
+          component: Vue.defineAsyncComponent(
+            () => import('./views/Admin/Dictionary.vue')
+          ),
         },
         {
           path: '/admin/page',
           name: 'page',
-          component: () => import('./views/Admin/Page.vue')
-        }
-      ]
-    }
-  ]
+          component: Vue.defineAsyncComponent(
+            () => import('./views/Admin/Page.vue')
+          ),
+        },
+      ],
+    },
+  ],
 })
 
 // 判断是否需要登录权限 以及是否登录
 kejianrouter.beforeEach((to, from, next) => {
   // 判断是否需要登录权限
-  if (to.matched.some(res => res.meta.requireAuth)) {
+  if (to.matched.some((res) => res.meta.requireAuth)) {
     // 判断是否登录
     if (sessionStorage.getItem('token')) {
       next()
@@ -118,8 +141,8 @@ kejianrouter.beforeEach((to, from, next) => {
       next({
         path: '/login',
         query: {
-          redirect: to.fullPath
-        }
+          redirect: to.fullPath,
+        },
       })
     }
   } else {

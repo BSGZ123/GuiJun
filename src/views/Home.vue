@@ -1,6 +1,6 @@
 <template>
   <div class="home" v-loading="loading">
-    <swiper id="swiperBox" v-bind:options="swiperOption" ref="mySwiper">
+    <swiper v-bind:options="swiperOption" id="swiperBox" ref="mySwiper">
       <swiper-slide class="swiper-slide slide-one">
         <div class="page">
           <h3>桂君智能化</h3>
@@ -15,16 +15,16 @@
         </div>
         <ul class="case-item">
           <li
-            v-for="(item,index) in caseList"
+            v-for="(item, index) in caseList"
             :key="index"
             v-lazy:background-image="imgserver + item.Img"
           >
             <router-link
               class="text-decoration"
-              :to="{ name: 'casedetails', params: { id: item.Id }}"
+              :to="{ name: 'casedetails', params: { id: item.Id } }"
             >
               <div class="case-item-hover">
-                <p class="hover-title">{{item.Title}}</p>
+                <p class="hover-title">{{ item.Title }}</p>
                 <div class="bottom"></div>
                 <div class="more">
                   <span>MORE</span>
@@ -40,13 +40,16 @@
           <p>Latest News</p>
         </div>
         <div class="news-content">
-          <div class="news-content-item" v-for="(news,i) in newsList" :key="i">
-            <div :style="'order: '+ (i%2==0 ? 1: 3)">
+          <div class="news-content-item" v-for="(news, i) in newsList" :key="i">
+            <div :style="'order: ' + (i % 2 == 0 ? 1 : 3)">
               <router-link
                 class="text-decoration"
-                :to="{ name: 'newsdetails', params: { id: news.Id }}"
+                :to="{ name: 'newsdetails', params: { id: news.Id } }"
               >
-                <div class="item-img" v-lazy:background-image="imgserver + news.Img"></div>
+                <div
+                  class="item-img"
+                  v-lazy:background-image="imgserver + news.Img"
+                ></div>
               </router-link>
             </div>
             <div style="order: 2">
@@ -54,10 +57,10 @@
                 <i class="el-icon-apple"></i>
               </el-divider>
             </div>
-            <div class="item-content" :style="'order: '+ (i%2==0 ? 3: 1)">
-              <h3>{{news.Title}}</h3>
-              <p>{{news.Content}}</p>
-              <span>{{news.CreateTime}}</span>
+            <div class="item-content" :style="'order: ' + (i % 2 == 0 ? 3 : 1)">
+              <h3>{{ news.Title }}</h3>
+              <p>{{ news.Content }}</p>
+              <span>{{ news.CreateTime }}</span>
             </div>
           </div>
         </div>
@@ -67,16 +70,17 @@
 </template>
 
 <script>
+import * as Vue from 'vue'
 import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
 
 export default {
   components: {
     Swiper,
-    SwiperSlide
+    SwiperSlide,
   },
   directives: {
-    swiper: directive
+    swiper: directive,
   },
   data() {
     return {
@@ -85,7 +89,7 @@ export default {
       newsList: [],
       swiperOption: {
         notNextTick: true, //notNextTick是一个组件自有属性，如果notNextTick设置为true，组件则不会通过NextTick来实例化swiper，也就意味着你可以在第一时间获取到swiper对象，假如你需要刚加载遍使用获取swiper对象来做什么事，那么这个属性一定要是true
-        direction: "vertical", //水平方向移动
+        direction: 'vertical', //水平方向移动
         grabCursor: true, //鼠标覆盖Swiper时指针会变成手掌形状，拖动时指针会变成抓手形状
         setWrapperSize: true, //Swiper使用flexbox布局(display: flex)，开启这个设定会在Wrapper上添加等于slides相加的宽或高，在对flexbox布局的支持不是很好的浏览器中可能需要用到。
         autoHeight: true, //自动高度。设置为true时，wrapper和container会随着当前slide的高度而发生变化
@@ -115,47 +119,41 @@ export default {
           //     this.list = this.list.concat(newList);
           //   }
           // }
-        }
-      }
-    };
+        },
+      },
+    }
   },
   created() {},
   // 如果你需要得到当前的swiper对象来做一些事情，你可以像下面这样定义一个方法属性来获取当前的swiper对象，同时notNextTick必须为true
   computed: {
     swiper() {
-      return this.$refs.mySwiper.swiper;
-    }
+      return this.$refs.mySwiper.swiper
+    },
   },
   mounted() {
     this.$http
       .all([
-        this.$http.get("Cases/GetCasesAll"),
-        this.$http.get(`News?type=1&num=3`)
+        this.$http.get('Cases/GetCasesAll'),
+        this.$http.get(`News?type=1&num=3`),
       ])
       .then(
         this.$http.spread((responseCases, responseNews) => {
-          this.caseList = responseCases.data;
-          this.newsList = responseNews.data;
-          this.loading = false;
+          this.caseList = responseCases.data
+          this.newsList = responseNews.data
+          this.loading = false
         })
-      );
-  }
-};
+      )
+  },
+}
 </script>
 
 <style lang="scss" scoped>
-/* .el-header {
-  position: absolute;
-} */
 .swiper-slide {
-  font-size: 24px;
-  // text-align: center;
-  // line-height: 100px;
+  font-size: 24px; /*// text-align: center;*/ /*// line-height: 100px;*/
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-content: center;
-
   .page {
     text-align: center;
     height: 100px;
@@ -174,14 +172,13 @@ export default {
     color: #fff;
     padding: 30px 0;
   }
-}
-//经典案例
+} /*//经典案例
+*/
 .case-item {
   width: 1100px;
   height: 500px;
   overflow: hidden;
-  margin: 0 auto;
-  margin-top: 30px;
+  margin: 30px auto 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -204,8 +201,8 @@ export default {
       }
     }
   }
-}
-//经典案例hover
+} /*//经典案例hover
+*/
 .case-item-hover {
   width: 100%;
   height: 100%;
@@ -215,7 +212,6 @@ export default {
   opacity: 0;
   overflow: hidden;
   background-color: rgba(225, 56, 52, 0.7);
-
   .hover-title {
     height: 50px;
     color: #fff;
@@ -234,21 +230,20 @@ export default {
   .more {
     width: 90px;
     padding: 5px 5px;
-    margin: 0 auto;
-    margin-top: 100px;
+    margin: 100px auto 0;
     border: 2px solid #fff;
     span {
       color: #fff;
       font-size: 20px;
     }
   }
-}
-// .swiper-slide:nth-child(2n) {
-//   background: skyblue;
-// }
-// .swiper-slide:nth-child(2n-1) {
-//   background: seashell;
-// }
+} /*// .swiper-slide:nth-child(2n)*/
+// {
+//  /*//   background: skyblue;*/ /*//*/
+//} /*// .swiper-slide:nth-child(2n-1)*/
+// {
+//  /*//   background: seashell;*/ /*//*/
+//}
 .slide-one {
   background: url(../assets/img/home_top.jpg) no-repeat center;
   background-size: cover;
@@ -260,15 +255,13 @@ export default {
 .slide-three {
   background: url(../assets/img/home_anli.jpg) no-repeat center;
   background-size: cover;
-}
-//最新资讯
+} /*//最新资讯
+*/
 .news-content {
   width: 1240px;
-  margin: 0 auto;
-  margin-top: 40px;
+  margin: 40px auto 0;
   display: flex;
   justify-content: center;
-
   &-item {
     width: 400px;
     display: flex;
