@@ -1,5 +1,7 @@
-# Shanghai kejian engineering management
-> 科健工程管理有限公司企业官网 前端    
+# YanCheng GuiJun engineering management 基于Shanghai kejian engineering management前端项目重构升级
+> 桂君工程智能化工程有限公司企业官网 前端    
+
+感谢原作者feng的分享
 
 一个业余时间（三周）的外包项目 最终成品：http://www.shkjem.com    
 主分支已更新至改进版，老版本源码移至 Release  
