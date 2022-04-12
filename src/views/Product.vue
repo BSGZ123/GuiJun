@@ -149,10 +149,10 @@ export default {
   created() {
     this.$http
       .get(
-        "DataDictionary/GetDataDictionaryAll?key=%E4%BA%A7%E5%93%81%E8%A7%86%E9%A2%91%E9%93%BE%E6%8E%A5"
+        "api/DataDictionary"
       )
       .then(response => {
-        this.videoSrc = response.data[0].Content;
+        this.videoSrc = response.data.result.content;
         window.console.log(this.videoSrc);
         this.loading = false;
       })

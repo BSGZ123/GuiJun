@@ -129,8 +129,8 @@ export default {
   mounted() {
     this.$http
       .all([
-        this.$http.get("Case"),
-        this.$http.get(`News`)
+        this.$http.get("api/Case"),
+        this.$http.get(`api/News`)
       ])
       .then(
         this.$http.spread((responseCases, responseNews) => {

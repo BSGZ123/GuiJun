@@ -47,15 +47,15 @@
             </li>
             <li>
               <p>联系我们</p>
-              <span>邮箱：kejianlml@163.com</span>
-              <span>电话：021-55802368</span>
-              <span>地址：上海市杨浦区翔殷路128号12号楼101</span>
+              <span>邮箱：xxxxxxxx@163.com</span>
+              <span>电话：xxxxxxxx</span>
+              <span>地址：xxxxxxxxx</span>
             </li>
           </ul>
           <img src="./assets/img/ercode.png" alt />
         </div>
         <div class="copyright">
-          <span>科建版权所有</span>
+          <span>桂君版权所有</span>
         </div>
       </div>
     </el-container>
