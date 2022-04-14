@@ -2,7 +2,7 @@
   <div class="login">
     <el-card class="box-card">
       <div slot="header" class="clearfix">
-        <span>科建后台登录入口</span>
+        <span>桂君后台登录入口</span>
       </div>
       <div>
         <el-form
@@ -99,7 +99,7 @@ export default {
 <style lang="scss" scoped>
 a {
   text-decoration: none;
-  color: #409eff;
+  color: #36367d;
 }
 
 .login {

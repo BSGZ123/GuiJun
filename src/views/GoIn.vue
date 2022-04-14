@@ -1,6 +1,6 @@
 <template>
   <div class="go-in">
-    <banner img="../assets/img/bgtop.jpg" title="走进科建" />
+    <banner img="../assets/img/bgtop.jpg" title="走进桂君" />
     <div class="section" v-loading="loading">
       <div class="section-content">
         <div class="content-summary">
@@ -8,13 +8,13 @@
             <p class="title">公司简介</p>
             <p class="eTitle">ABOUT US</p>
             <p class="content">
-              上海科建工程管理股份有限公司成立于2012年9月，注册资金500万。公司前身上海科建工程管理有限公司，
-              是一家从事专业工程技术服务及工程项目管理的企业。公司于2017年11月通过国家高新技术企业认定，
-              目前工程管理软件研发团队10人，包括硕士和研究生在内，平均年龄在35岁。公司自主研发工程项目管理
+              盐城桂君智能化工程有限公司成立于2015年6月，注册资金200万。公司前身上海科建工程管理有限公司，
+              是一家从事专业工程技术服务的企业。公司于20xx年11月通过国家高新技术企业认定，
+              目前工程管理软件研发团队10人，包括硕士研究生在内，平均年龄在35岁。公司自主研发工程项目管理
               标准化+互联网协同工作系统平台，此软件广泛应用于工程项目管理过程，实现全覆盖检查、全过程控制、全方位协调的目标。
-              目前公司业务范围涉及上海、广东等多地，合作的单位有上海同济工程项目管理咨询有限公司、
-              上海华银日用品有限公司、中科建设开发总公司、广东怡轩房地产开发有限公司等多家知名企业。 立人立己、达人达己！公司一直秉承“
-              帮助施工单位解决技术问题、帮助业主解决协调问题 ”的管理理念，上海科建工程管理股份有限公司不断在工程项目管理领域开拓创新，
+              目前公司业务范围涉及xxxx等多地，合作的单位有xxxxxxxx、
+              xxxxxxxxxxxxxxxxxxx等多家知名企业。 xxxxxxxxxxxxxx！公司一直秉承“
+              帮助施工单位解决技术问题、帮助业主解决协调问题 ”的管理理念，盐城桂君智能化工程有限公司有限公司不断在工程项目管理领域开拓创新，
               通过不断完善工程项目管理标准化+互联网协同工作系统平台，实现每项工程“无重大安全事故、无重大返工、工程施工材料无伪劣产品、
               工程管理留下痕迹、施工过程可追溯”五大管理目标。
             </p>
@@ -45,8 +45,8 @@
                     </el-divider>
                     <div class="item-bottom" :class="{'order' : one%2===1}">
                       <div class="item-bottom-content">
-                        <p>{{courseOne.Content}}</p>
-                        <p>{{courseOne.Year}}</p>
+                        <p>{{courseOne.content}}</p>
+                        <p>{{courseOne.year}}</p>
                       </div>
                     </div>
                   </div>
@@ -82,8 +82,8 @@
           <ul class="honor-show">
             <li v-for="(honor,index) in honorList" :key="index">
               <img
-                v-lazy="imgserver+honor.Img"
-                @click="dialogTableVisible = true ;dialogUrl = imgserver + honor.Img;dialogTitle= honor.Remark"
+                v-lazy="honor.img"
+                @click="dialogTableVisible = true ;dialogUrl = honor.img;dialogTitle= honor.remark"
               />
             </li>
           </ul>
@@ -97,7 +97,7 @@
           </div>
           <el-carousel :interval="4000" type="card">
             <el-carousel-item v-for="(team,index) in teamItem" :key="index">
-              <div class="swiper-img" v-lazy:background-image="imgserver + team.Img"></div>
+              <div class="swiper-img" v-lazy:background-image="team.img"></div>
             </el-carousel-item>
           </el-carousel>
         </div>
@@ -108,7 +108,7 @@
             <p>RARTNERS</p>
             <ul class="partner-img">
               <li v-for="(partner,i) in partnerImg" :key="i">
-                <img v-lazy="imgserver+partner.Img" alt />
+                <img v-lazy="partner.img" alt />
               </li>
             </ul>
           </div>
@@ -153,19 +153,19 @@ export default {
   mounted() {
     this.$http
       .all([
-        this.$http.get("Honor/GetHonorAll"),
-        this.$http.get("Enterprise/GetEnterpriseAll"),
-        this.$http.get(`Team/GetTeamAll`),
-        this.$http.get(`Course/GetCourseAll`)
+        this.$http.get("api/Honor"),
+        this.$http.get("api/Enterprise"),
+        this.$http.get(`api/Team`),
+        this.$http.get(`api/Course`)
       ])
       .then(
         this.$http.spread(
           (responseHonor, responseEnterprise, responseTeam, responseCourse) => {
-            this.honorList = responseHonor.data;
-            this.partnerImg = responseEnterprise.data;
-            this.teamItem = responseTeam.data;
+            this.honorList = responseHonor.data.result;
+            this.partnerImg = responseEnterprise.data.result;
+            this.teamItem = responseTeam.data.result;
 
-            var groupCount = Math.ceil(responseCourse.data.length / 2);
+            var groupCount = Math.ceil(responseCourse.data.result.length / 2);
             window.console.log(groupCount);
             for (let i = 0; i < groupCount; i++) {
               let img2 = [];
