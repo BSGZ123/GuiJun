@@ -58,17 +58,17 @@ export default {
       this.$refs.lform.validate(valid => {
         if (valid) {
           this.$http
-            .get(
-              `User/Login?strUser=${this.loginform.name}&strPwd=${this.loginform.pass}`
+            .post(
+              `api/Account/Login`,{loginName:this.loginform.name,password:this.loginform.pass}
             )
             .then(response => {
               window.console.log(response);
-              if (response.data.bRes) {
+              if (response.data.isSuccess) {
                 this.$message({
                   message: "登录成功了呢",
                   type: "success"
                 });
-                sessionStorage.setItem("token", response.data.Ticket);
+                sessionStorage.setItem("token", response.data.result);
                 this.$router.push({ name: "admin" });
               } else {
                 this.$message({

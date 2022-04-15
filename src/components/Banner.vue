@@ -2,7 +2,7 @@
   <div class="banner">
     <div class="mm"></div>
     <div class="banner-img">
-      <img src="../assets/img/bgtop.jpg" />
+      <img src="../assets/img/bgtop1.jpg" />
     </div>
     <div class="banner-title">
       <p>{{title}}</p>
@@ -20,7 +20,7 @@ export default {
     },
     img: {
       type: String,
-      default: "../assets/img/bgtop.jpg"
+      default: "../assets/img/bgtop1.jpg"
     }
   }
 };

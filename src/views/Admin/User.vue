@@ -3,26 +3,26 @@
     <el-button type="primary" @click="openDialog()">新增用户</el-button>
     <el-button type="danger">清除用户身份票据</el-button>
     <el-table border :data="tableData" v-loading="loading" style="width: 100%">
-      <el-table-column prop="Id" label="序号"></el-table-column>
-      <el-table-column prop="LoginName" label="用户名"></el-table-column>
-      <el-table-column prop="Password" label="密码"></el-table-column>
-      <el-table-column prop="IsAction" label="是否启用">
-        <template v-slot="scope">{{ scope.row.IsAction ? '是':'否' }}</template>
+      <el-table-column prop="id" label="序号"></el-table-column>
+      <el-table-column prop="loginName" label="用户名"></el-table-column>
+      <el-table-column prop="password" label="密码"></el-table-column>
+      <el-table-column prop="isAction" label="是否启用">
+        <template v-slot="scope">{{ scope.row.isAction ? '是':'否' }}</template>
       </el-table-column>
-      <el-table-column prop="CreateTime" label="创建时间" :formatter="dateFormat"></el-table-column>
+      <el-table-column prop="createTime" label="创建时间" ></el-table-column>
       <el-table-column label="操作">
         <template v-slot="scope">
           <el-button
             type="primary"
             icon="el-icon-edit"
             @click="handleEdit(scope.$index, scope.row)"
-            :disabled="scope.row.LoginName == 'admin'"
+            :disabled="scope.row.LoginName === 'admin'"
           ></el-button>
           <el-button
             type="danger"
             icon="el-icon-delete"
             @click="handleDelete(scope.$index, scope.row)"
-            :disabled="scope.row.LoginName == 'admin'"
+            :disabled="scope.row.LoginName === 'admin'"
           ></el-button>
         </template>
       </el-table-column>
@@ -30,14 +30,14 @@
     <el-dialog title="用户信息操作" :visible.sync="dialogFormVisible">
       <el-form :model="formData">
         <el-form-item label="登录名" :label-width="formLabelWidth">
-          <el-input v-model="formData.LoginName" autocomplete="off"></el-input>
+          <el-input v-model="formData.loginName" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="密码" :label-width="formLabelWidth">
-          <el-input v-model="formData.Password" autocomplete="off"></el-input>
+          <el-input v-model="formData.password" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="是否启用" :label-width="formLabelWidth">
-          <el-radio v-model="formData.IsAction" :label="true" border>是</el-radio>
-          <el-radio v-model="formData.IsAction" :label="false" border>否</el-radio>
+          <el-radio v-model="formData.isAction" :label="true" border>是</el-radio>
+          <el-radio v-model="formData.isAction" :label="false" border>否</el-radio>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -57,11 +57,11 @@ export default {
       formLabelWidth: "120px",
       tableData: [],
       formData: {
-        Id: 0,
-        LoginName: "",
-        Password: "",
-        IsAction: true,
-        CreateTime: new Date()
+        id: 0,
+        loginName: "",
+        password: "",
+        isAction: true,
+        createTime: new Date()
       },
       options: {}
     };
@@ -81,10 +81,10 @@ export default {
     loadData() {
       this.loading = true;
       this.$http
-        .post("User/GetUserAll", null, this.options)
+        .get("api/User")
         .then(response => {
           window.console.log(response);
-          this.tableData = response.data;
+          this.tableData = response.data.result;
           this.loading = false;
         })
         .catch(e => {
@@ -96,11 +96,11 @@ export default {
     },
     openDialog() {
       // 清除数据
-      this.formData.Id = 0;
-      this.formData.LoginName = "";
-      this.formData.Password = "";
-      this.formData.IsAction = true;
-      this.formData.CreateTime = new Date();
+      this.formData.id = 0;
+      this.formData.loginName = "";
+      this.formData.password = "";
+      this.formData.isAction = true;
+      this.formData.createTime = new Date();
 
       this.dialogFormVisible = true;
     },
@@ -112,7 +112,7 @@ export default {
         // ID 无效时 视为新增
         this.loading = true;
         this.$http
-          .post("User/CreateUser", this.formData, this.options)
+          .put("api/User", this.formData, this.options)
           .then(response => {
             this.loading = false;
             window.console.log(response);
@@ -132,7 +132,7 @@ export default {
       } else {
         this.loading = true;
         this.$http
-          .post("User/ModifiedUser", this.formData, this.options)
+          .post("api/User", this.formData, this.options)
           .then(response => {
             this.loading = false;
             window.console.log(response);
@@ -168,7 +168,7 @@ export default {
           // 调接口删除
           this.loading = true;
           this.$http
-            .post(`User/DeleteUser?id=${row.Id}`, null, this.options)
+            .delete(`api/User/${row.id}`)
             .then(response => {
               this.loading = false;
               window.console.log(response);
@@ -195,7 +195,7 @@ export default {
     //时间格式化
     dateFormat: function(row) {
       //row 表示一行数据, CreateTime 表示要格式化的字段名称
-      let t = new Date(row.CreateTime);
+      let t = new Date(row.createTime);
       return t.getFullYear() + "-" + (t.getMonth() + 1) + "-" + t.getDate();
     }
   }
