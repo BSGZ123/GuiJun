@@ -68,7 +68,7 @@ export default {
   },
   mounted() {
     let token = "Browser " + sessionStorage.getItem("token");
-    //window.console.log(token);
+    window.console.log(token);
     this.options = {
       headers: {
         Authorization: token
