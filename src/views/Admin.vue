@@ -9,7 +9,7 @@
           </el-menu-item>
           <el-menu-item index="/admin/news">
             <i class="el-icon-news"></i>
-            <span slot="title">新闻咨询管理</span>
+            <span slot="title">新闻资讯管理</span>
           </el-menu-item>
           <el-menu-item index="/admin/cases">
             <i class="el-icon-location-outline"></i>
