@@ -43,7 +43,7 @@
         <el-form-item label="新闻图片" :label-width="formLabelWidth">
           <el-upload
             class="avatar-uploader"
-            action="http://shkjgw.shkjem.com/api/UpLoad/UploadImage"
+            action="http://127.0.0.1/api/UpLoad/UploadImage"
             :headers="headers"
             :show-file-list="false"
             :on-success="handleSuccess"
@@ -90,7 +90,7 @@ export default {
     };
   },
   mounted() {
-    let token = "Browser " + sessionStorage.getItem("token");
+    let token = "Bearer " + sessionStorage.getItem("token");
     //window.console.log(token);
     this.options = {
       headers: {
@@ -196,7 +196,7 @@ export default {
           // 调接口删除
           this.loading = true;
           this.$http
-            .delete(`api/News/${row.id}`)
+            .delete(`api/News/${row.id}`,this.options)
             .then(response => {
               this.loading = false;
               window.console.log(response);

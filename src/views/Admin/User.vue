@@ -67,7 +67,7 @@ export default {
     };
   },
   mounted() {
-    let token = "Browser " + sessionStorage.getItem("token");
+    let token = "Bearer " + sessionStorage.getItem("token");
     window.console.log(token);
     this.options = {
       headers: {
@@ -81,7 +81,7 @@ export default {
     loadData() {
       this.loading = true;
       this.$http
-        .get("api/User")
+        .get("api/User",this.options)
         .then(response => {
           window.console.log(response);
           this.tableData = response.data.result;
@@ -168,7 +168,7 @@ export default {
           // 调接口删除
           this.loading = true;
           this.$http
-            .delete(`api/User/${row.id}`)
+            .delete(`api/User/${row.id}`,this.options)
             .then(response => {
               this.loading = false;
               window.console.log(response);
