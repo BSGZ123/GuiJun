@@ -6,7 +6,7 @@
       <el-table-column prop="Id" label="序号" width="180"></el-table-column>
       <el-table-column prop="Title" label="案例标题" width="180"></el-table-column>
       <el-table-column prop="Img" label="图片">
-        <template slot-scope="scope">
+        <template v-slot="scope">
           <img style="width:100%" :src="imgserver+scope.row.Img" alt />
         </template>
       </el-table-column>
