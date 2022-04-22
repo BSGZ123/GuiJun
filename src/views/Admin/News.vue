@@ -7,7 +7,7 @@
       <el-table-column prop="title" label="新闻标题" width="180"></el-table-column>
       <el-table-column prop="img" label="图片">
         <template v-slot="scope">
-          <img style="width:100%" :src="imgserver + scope.row.img" alt />
+          <img style="width:100%" :src="scope.row.img" alt />
         </template>
       </el-table-column>
       <el-table-column prop="Content" label="新闻内容">
@@ -48,7 +48,7 @@
             :show-file-list="false"
             :on-success="handleSuccess"
           >
-            <img v-if="formData.img" :src="imgserver+formData.img" class="avatar" />
+            <img v-if="formData.img" :src="formData.img" class="avatar" />
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </el-form-item>
@@ -106,7 +106,7 @@ export default {
   methods: {
     handleSuccess(response, file, fileList) {
       window.console.log(response, file, fileList);
-      this.formData.Img = response;
+      this.formData.img = response.result;
     },
     loadData() {
       this.loading = true;
