@@ -3,13 +3,13 @@
     <el-button type="primary" @click="openDialog()">新增数据</el-button>
 
     <el-table border :data="tableData" v-loading="loading" style="width: 100%">
-      <el-table-column prop="Id" label="序号" width="180"></el-table-column>
-      <el-table-column prop="Img" label="图片">
+      <el-table-column prop="id" label="序号" width="180"></el-table-column>
+      <el-table-column prop="img" label="图片">
         <template v-slot="scope">
-          <img style="width:100%" :src="imgserver+scope.row.Img" alt />
+          <img style="width:100%" :src="scope.row.img" alt />
         </template>
       </el-table-column>
-      <el-table-column prop="Remark" label="备注"></el-table-column>
+      <el-table-column prop="remark" label="备注"></el-table-column>
       <el-table-column label="操作">
         <template v-slot="scope">
           <el-button
@@ -30,17 +30,17 @@
         <el-form-item label="风采图片" :label-width="formLabelWidth">
           <el-upload
             class="avatar-uploader"
-            action="http://shkjgw.shkjem.com/api/UpLoad/UploadImage"
+            action="http://bskplu.buzz:5001/api/File/UploadingFormFile"
             :headers="headers"
             :show-file-list="false"
             :on-success="handleSuccess"
           >
-            <img v-if="formData.Img" :src="imgserver+formData.Img" class="avatar" />
+            <img v-if="formData.img" :src="formData.img" class="avatar" />
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </el-form-item>
         <el-form-item label="备注" :label-width="formLabelWidth">
-          <el-input v-model="formData.Remark" autocomplete="off"></el-input>
+          <el-input v-model="formData.remark" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -60,17 +60,17 @@ export default {
       formLabelWidth: "120px",
       tableData: [],
       formData: {
-        Id: 0,
-        Img: "",
-        Remark: "",
-        CreateTime: new Date()
+        id: 0,
+        img: "",
+        remark: "",
+        createTime: new Date()
       },
       options: {},
       headers: {}
     };
   },
   mounted() {
-    let token = "Browser " + sessionStorage.getItem("token");
+    let token = "Bearer " + sessionStorage.getItem("token");
     //window.console.log(token);
     this.options = {
       headers: {
@@ -86,15 +86,15 @@ export default {
   methods: {
     handleSuccess(response, file, fileList) {
       window.console.log(response, file, fileList);
-      this.formData.Img = response;
+      this.formData.img = response.result;
     },
     loadData() {
       this.loading = true;
       this.$http
-        .get("Team/GetTeamAll")
+        .get("api/Team")
         .then(response => {
           window.console.log(response);
-          this.tableData = response.data;
+          this.tableData = response.data.result;
           this.loading = false;
         })
         .catch(e => {
@@ -106,10 +106,10 @@ export default {
     },
     openDialog() {
       // 清除数据
-      this.formData.Id = 0;
-      this.formData.Img = "";
-      this.formData.Remark = "";
-      this.formData.CreateTime = new Date();
+      this.formData.id = 0;
+      this.formData.img = "";
+      this.formData.remark = "";
+      this.formData.createTime = new Date();
 
       this.dialogFormVisible = true;
     },
@@ -117,11 +117,11 @@ export default {
     handleCreateOrModify() {
       window.console.log(this.formData);
       //window.console.log(JSON.stringify(this.formData));
-      if (!this.formData.Id) {
+      if (!this.formData.id) {
         // ID 无效时 视为新增
         this.loading = true;
         this.$http
-          .post("Team/CreateTeam", this.formData, this.options)
+          .put("api/Team", this.formData, this.options)
           .then(response => {
             this.loading = false;
             window.console.log(response);
@@ -141,7 +141,7 @@ export default {
       } else {
         this.loading = true;
         this.$http
-          .post("Team/ModifiedTeam", this.formData, this.options)
+          .put("api/Team", this.formData, this.options)
           .then(response => {
             this.loading = false;
             window.console.log(response);
@@ -177,7 +177,7 @@ export default {
           // 调接口删除
           this.loading = true;
           this.$http
-            .post(`Team/DeleteTeam?id=${row.Id}`, null, this.options)
+            .delete(`api/Team/${row.id}`, this.options)
             .then(response => {
               this.loading = false;
               window.console.log(response);
@@ -204,7 +204,7 @@ export default {
     //时间格式化
     dateFormat: function(row) {
       //row 表示一行数据, CreateTime 表示要格式化的字段名称
-      let t = new Date(row.CreateTime);
+      let t = new Date(row.createTime);
       return t.getFullYear() + "-" + (t.getMonth() + 1) + "-" + t.getDate();
     }
   }

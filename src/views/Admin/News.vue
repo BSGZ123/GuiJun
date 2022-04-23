@@ -1,6 +1,6 @@
 <template>
   <div class="news">
-    <el-button type="primary" @click="openDialog()">新增</el-button>
+    <el-button type="primary" @click="openDialog()">新增资讯</el-button>
 
     <el-table :data="tableData" border style="width: 100%" v-loading="loading">
       <el-table-column prop="id" label="序号" width="180"></el-table-column>
