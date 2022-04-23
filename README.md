@@ -8,11 +8,10 @@
 
 感谢原作者feng的无私分享
 
-如果是学习的话推荐学习新版本 链接 http://kejian.filog.cn/    
-另外有些同学在问后端的代码 这里 https://github.com/ifzc/KeJian.Core.Api
+后端的代码 这里 https://github.com/BSGZ123/KeJian.Core.Api
 
 ## 新版本改进
-1. 整体重构，结构升级为最新 vue-cli
+1. 整体重构，结构升级为最新 vue-cli3
 2. 代码优化，去除引用的静态js文件
 3. 图片加载加入懒加载，整体性能提升很大
 4. 视频采用 vue-video-player 处理兼容性
