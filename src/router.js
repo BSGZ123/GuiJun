@@ -3,7 +3,7 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-let kejianrouter = new Router({
+let guijunrouter = new Router({
   routes: [{
       path: '/',
       name: 'home',
@@ -107,7 +107,7 @@ let kejianrouter = new Router({
 })
 
 // 判断是否需要登录权限 以及是否登录
-kejianrouter.beforeEach((to, from, next) => {
+guijunrouter.beforeEach((to, from, next) => {
   // 判断是否需要登录权限
   if (to.matched.some(res => res.meta.requireAuth)) {
     // 判断是否登录
@@ -127,4 +127,4 @@ kejianrouter.beforeEach((to, from, next) => {
   }
 })
 
-export default kejianrouter
+export default guijunrouter

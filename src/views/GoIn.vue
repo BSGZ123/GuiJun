@@ -8,7 +8,7 @@
             <p class="title">公司简介</p>
             <p class="eTitle">ABOUT US</p>
             <p class="content">
-              盐城桂君智能化工程有限公司成立于2015年6月，注册资金200万。公司前身上海科建工程管理有限公司，
+              盐城桂君智能化工程有限公司成立于2015年6月，注册资金200万。公司前身盐城XXX维修部，
               是一家从事专业工程技术服务的企业。公司于20xx年11月通过国家高新技术企业认定，
               目前工程管理软件研发团队10人，包括硕士研究生在内，平均年龄在35岁。公司自主研发工程项目管理
               标准化+互联网协同工作系统平台，此软件广泛应用于工程项目管理过程，实现全覆盖检查、全过程控制、全方位协调的目标。
@@ -61,7 +61,7 @@
         <div class="content-culture">
           <h3>企业文化</h3>
           <h3>CULTURE</h3>
-          <p>我们只专注一件事情——工程项目管理</p>
+          <p>我们只专注一件事情——工程项目建设</p>
           <span>确保工程无重大安全事故</span>
           <span>确保工程施工单位无大面积返工</span>
           <span>确保工程材料及设备无伪劣产品</span>
@@ -170,8 +170,8 @@ export default {
             for (let i = 0; i < groupCount; i++) {
               let img2 = [];
               for (let j = 0; j < 2; j++) {
-                if (responseCourse.data.length - 1 >= i * 2 + j) {
-                  img2.push(responseCourse.data[i * 2 + j]);
+                if (responseCourse.data.result.length - 1 >= i * 2 + j) {
+                  img2.push(responseCourse.data.result[i * 2 + j]);
                 }
               }
               this.courseList.push(img2);

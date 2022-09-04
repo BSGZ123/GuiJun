@@ -30,7 +30,7 @@
         <el-form-item label="企业Logo" :label-width="formLabelWidth">
           <el-upload
             class="avatar-uploader"
-            action="http://bskplu.buzz:5001/api/File/UploadingFormFile"
+            action="http://api.ycgjie.cn:5001/api/File/UploadingFormFile"
             :headers="headers"
             :show-file-list="false"
             :on-success="handleSuccess"

@@ -6,7 +6,7 @@
           <h3>桂君智能化</h3>
           <p>GuiJun Intelligent</p>
         </div>
-        <p class="slogan">立人立己 达人达己</p>
+        <p class="slogan">立人立己 成己成物</p>
       </swiper-slide>
       <swiper-slide class="swiper-slide slide-two">
         <div class="page">
@@ -63,6 +63,10 @@
         </div>
       </swiper-slide>
     </swiper>
+    <div style="position:fixed;text-align:center;bottom:0;margin:0 auto;width:100%;color: #595962">
+      <a target="_blank" style="color: #595962" href="https://beian.miit.gov.cn">苏ICP备2022020445号-1</a>&nbsp;
+      @2015-2022 盐城桂君智能化工程有限公司
+    </div>
   </div>
 </template>
 

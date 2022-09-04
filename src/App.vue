@@ -48,15 +48,13 @@
             <li>
               <p>联系我们</p>
               <span>邮箱：xxxxxxxx@163.com</span>
-              <span>电话：xxxxxxxx</span>
-              <span>地址：xxxxxxxxx</span>
+              <span>电话：0515-88330997</span>
+              <span>地址：盐城市亭湖区通榆北村再就业一条街6栋83号</span>
             </li>
           </ul>
           <img src="./assets/img/ercode.png" alt />
         </div>
-        <div class="copyright">
-          <span>桂君版权所有</span>
-        </div>
+
       </div>
     </el-container>
   </div>

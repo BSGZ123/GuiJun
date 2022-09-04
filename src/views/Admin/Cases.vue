@@ -35,7 +35,7 @@
           <!-- :before-upload="beforeAvatarUpload" -->
           <el-upload
             class="avatar-uploader"
-            action="http://localhost:5001/api/File/UploadingFormFile"
+            action="http://api.ycgjie.cn:5001/api/File/UploadingFormFile"
             :headers="headers"
             :show-file-list="false"
             :on-success="handleSuccess"
