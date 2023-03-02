@@ -1,7 +1,7 @@
 # YanCheng GuiJun engineering management 基于Shanghai kejian engineering management前端项目重构升级
 > 桂君智能化工程有限公司企业官网 前端    
 
-### 正在与作者提供的KeJian.Core.Api后端对接 1.计划升级Vue3 2.适配移动端
+### 已经完成作者提供的KeJian.Core.Api后端对接 后续计划：1.计划升级Vue3 2.适配移动端
 
 ## 在这里的改进
 1. 已经更新到vue2尽可能新的依赖版本，并解决了依赖问题。
