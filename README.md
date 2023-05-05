@@ -1,5 +1,5 @@
-# YanCheng GuiJun engineering management 基于Shanghai kejian engineering management前端项目重构升级
-> 桂君智能化工程有限公司企业官网 前端    
+# XXXCheng XXXXXXX engineering management 基于Shanghai kejian engineering management前端项目重构升级
+> XXXXXXXXX有限公司企业官网 前端    
 
 ### 已经完成作者提供的KeJian.Core.Api后端对接 后续计划：1.计划升级Vue3 2.适配移动端
 
@@ -7,8 +7,6 @@
 1. 已经更新到vue2尽可能新的依赖版本，并解决了依赖问题。
 
 感谢原作者feng的无私分享
-
-后端的代码 这里 https://github.com/BSGZ123/KeJian.Core.Api
 
 ## 新版本改进
 1. 整体重构，结构升级为最新 vue-cli3
